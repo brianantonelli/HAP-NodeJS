@@ -2,6 +2,13 @@
 var types = require("./types.js");
 var exports = module.exports = {};
 
+// REQUIRES wiringPi!
+//
+// cd
+// git clone git://git.drogon.net/wiringPi
+// cd wiringPi
+// ./build
+
 var toggleRelay = function(){
     var exec = require('child_process').exec;
     exec('gpio write 7 0', function (error, stdout, stderr) {
