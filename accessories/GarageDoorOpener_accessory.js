@@ -2,6 +2,15 @@
 var types = require("./types.js");
 var exports = module.exports = {};
 
+var toggleRelay = function(){
+    var exec = require('child_process').exec;
+    exec('gpio write 7 0', function (error, stdout, stderr) {
+        setTimeout(function(){
+            exec('gpio write 7 1', function (error, stdout, stderr) {});
+        }, 1000);
+    });    
+};
+
 var execute = function(accessory,characteristic,value){ 
     var characteristic = characteristic.toLowerCase();
 
@@ -9,14 +18,19 @@ var execute = function(accessory,characteristic,value){
         console.log('TODO: current state');
     }
     else if(characteristic == 'target state'){
-        console.log('TODO: target state');
+        if(value == 1){ // Close
+            toggleRelay();
+        }
+        else if(value == 0){ // Open
+            toggleRelay();
+        }
     }
     else if(characteristic == 'obstruction detected'){
         console.log('TODO: obstruction detection');
     }
  
     console.log("executed accessory: " + accessory + ", and characteristic: " + characteristic + ", with value: " +  value + ".");
-}
+};
 
 exports.accessory = {
   displayName: "Garage Door Opener",
