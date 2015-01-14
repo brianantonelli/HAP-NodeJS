@@ -1,5 +1,5 @@
 // HomeKit types required
-var types = require("./types.js")har
+var types = require("./types.js");
 var exports = module.exports = {};
 
 var execute = function(accessory,characteristic,value){ 
